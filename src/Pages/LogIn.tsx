@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 interface LogInProps {}
 
 export const LogIn: React.FC<LogInProps> = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
@@ -20,9 +21,15 @@ export const LogIn: React.FC<LogInProps> = () => {
         };
         fetch("https://teetea-api.herokuapp.com/login", requestOptions)
         .then(response => response.json())
-        .then(response => setMessage("Successfully logged in!"))
+        .then(response => {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('user', JSON.stringify(response.user));
+        })
         .catch(err => console.log("ERROR", err))
+
+         navigate('/'); 
     }
+
   return (
     <div>
         <h1>LOG IN</h1>
@@ -38,7 +45,6 @@ export const LogIn: React.FC<LogInProps> = () => {
             </div>
 
             <button>Log In</button>
-            <div>{message ? message :  ""}</div>
         </form>
     </div>
   )

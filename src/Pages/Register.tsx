@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 interface RegisterProps {
 }
 
-interface User{
+export interface User{
+    _id?: string,
     name: string,
     email: string,
     phoneNumber: string,
