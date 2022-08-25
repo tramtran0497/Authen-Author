@@ -22,8 +22,8 @@ export const LogIn: React.FC<LogInProps> = () => {
         fetch("https://teetea-api.herokuapp.com/login", requestOptions)
         .then(response => response.json())
         .then(response => {
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('user', JSON.stringify(response.user));
+            sessionStorage.setItem('token', response.token);
+            sessionStorage.setItem('user', JSON.stringify(response.user));
         })
         .catch(err => console.log("ERROR", err))
 
@@ -41,7 +41,7 @@ export const LogIn: React.FC<LogInProps> = () => {
             
             <div>
                 <label htmlFor="password">Password</label>
-                <input type="password" value={password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} name="password"/>
+                <input type="password" value={password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} name="password" />
             </div>
 
             <button>Log In</button>

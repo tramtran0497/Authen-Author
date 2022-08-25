@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterProps {
 }
@@ -25,6 +26,7 @@ export const Register :React.FC<RegisterProps> = () => {
         isAdmin: false,
     });
 
+    const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
@@ -40,6 +42,9 @@ export const Register :React.FC<RegisterProps> = () => {
         .then(response => response.json())
         .then(response =>console.log("RES",response))
         .catch(err => console.log(err))
+
+        navigate('/login'); 
+
     }
 
   return (
