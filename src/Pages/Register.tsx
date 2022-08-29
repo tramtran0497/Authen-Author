@@ -40,7 +40,7 @@ export const Register :React.FC<RegisterProps> = () => {
         fetch('https://teetea-api.herokuapp.com/users', requestOptions)
         // fetch('http://localhost:5001/users', requestOptions)
         .then(response => response.json())
-        .then(response =>console.log("RES",response))
+        // .then(response =>console.log("RES",response))
         .catch(err => console.log(err))
 
         navigate('/login'); 

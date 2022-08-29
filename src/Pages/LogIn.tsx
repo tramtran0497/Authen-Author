@@ -8,26 +8,25 @@ export const LogIn: React.FC<LogInProps> = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
-        
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        };
-        fetch("https://teetea-api.herokuapp.com/login", requestOptions)
-        .then(response => response.json())
-        .then(response => {
-            sessionStorage.setItem('token', response.token);
-            sessionStorage.setItem('user', JSON.stringify(response.user));
-        })
-        .catch(err => console.log("ERROR", err))
-
-         navigate('/'); 
+        try{
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            };
+            const response = await fetch("https://teetea-api.herokuapp.com/login", requestOptions)
+            const resJson = await response.json()
+            sessionStorage.setItem('token', resJson.token);
+            sessionStorage.setItem('user', JSON.stringify(resJson.user));
+            navigate('/')
+        } catch(err) {
+            console.log("ERROR", err)
+        }
     }
 
   return (
