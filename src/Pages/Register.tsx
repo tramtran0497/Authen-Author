@@ -28,23 +28,20 @@ export const Register :React.FC<RegisterProps> = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>):  Promise<void> => {
         event.preventDefault();
-        
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        };
+        try{
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            };
+            await fetch('https://teetea-api.herokuapp.com/users', requestOptions)
+            navigate('/login'); 
 
-        fetch('https://teetea-api.herokuapp.com/users', requestOptions)
-        // fetch('http://localhost:5001/users', requestOptions)
-        .then(response => response.json())
-        // .then(response =>console.log("RES",response))
-        .catch(err => console.log(err))
-
-        navigate('/login'); 
-
+        } catch(err) {
+            console.log(err)
+        }
     }
 
   return (

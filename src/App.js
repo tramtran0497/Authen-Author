@@ -1,4 +1,3 @@
-import './App.css';
 import { LogIn } from './Pages/LogIn.tsx';
 import {Register} from './Pages/Register.tsx';
 import { Routes, Route} from 'react-router-dom';
