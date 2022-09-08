@@ -38,7 +38,6 @@ export const Home:React.FC<HomeProps> = () => {
                 if(token){
                     const data = await fetch(`https://teetea-api.herokuapp.com/user/username`, requestOptions)
                     const resJson = await data.json()
-                    console.log(resJson)
                     setUser({
                         name: resJson.name,
                         email: resJson.email,
