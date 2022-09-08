@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Edit } from './EditProfile.tsx';
-import { View } from "./ViewProfile.tsx";
+import { Edit } from './EditProfile';
+import { View } from "./ViewProfile";
 
 interface HomeProps {}
 export interface UserShowing{
@@ -16,7 +16,13 @@ export const Home:React.FC<HomeProps> = () => {
     const [showing, setShowing] = useState(false)
     const [showingEdit, setShowingEdit] = useState(false)
 
-    const [user, setUser] = useState<UserShowing>()
+    const [user, setUser] = useState<UserShowing>({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        address: "",
+        DOB: "",
+    })
     const navigate = useNavigate();
     useEffect(() => {
     })
