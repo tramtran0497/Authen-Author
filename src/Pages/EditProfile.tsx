@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { UserShowing } from './Home'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../Redux/store'
+import { fetchUser } from '../Redux/Slices/userSlice'
 
 interface EditProps {
     user: UserShowing
@@ -7,6 +10,7 @@ interface EditProps {
 
 export const Edit:React.FC<EditProps> = ({user}) => {
     const [updatedUser, setUpdatedUser] = useState<UserShowing>(user);
+    const dispatch = useDispatch<AppDispatch>();
 
 
     const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -20,14 +24,15 @@ export const Edit:React.FC<EditProps> = ({user}) => {
                 body: JSON.stringify(updatedUser)
             };
             const response = await fetch("https://teetea-api.herokuapp.com/user/username", requestOptions)
-            const resJson = await response.json()
-            console.log(resJson)
+            await response.json()
+            dispatch(fetchUser())
         } catch(err) {
             console.log(err)
         }
     }
 
     useEffect(() => {
+
     })
     
   return (
