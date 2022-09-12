@@ -7,6 +7,8 @@ export const LogIn: React.FC<LogInProps> = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const url = "http://localhost:5001/login"
+    // const url = "https://teetea-api.herokuapp.com/login"
 
     const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
@@ -19,7 +21,7 @@ export const LogIn: React.FC<LogInProps> = () => {
                     password: password
                 })
             };
-            const response = await fetch("https://teetea-api.herokuapp.com/login", requestOptions)
+            const response = await fetch(url, requestOptions)
             const resJson = await response.json()
             sessionStorage.setItem('token', resJson.token);
             sessionStorage.setItem('user', JSON.stringify(resJson.user));

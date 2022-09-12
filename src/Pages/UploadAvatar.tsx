@@ -3,25 +3,40 @@ interface UploadAvatarProps {
 }
 
 export const UploadAvatar:React.FC<UploadAvatarProps> = () => {
-    const [avatar, setAvatar] = useState("");
-
-    const handleChange=(event: any) => {
+    const [avatar, setAvatar] = useState<any>();
+    // const url = "https://teetea-api.herokuapp.com/user/username/avatar"
+    const url = "http://localhost:5001/user/username/avatar"
+    const handleChange=(event:  any) => {
       const file = event.target.files[0]
-      console.log(URL.createObjectURL(file));
-      setAvatar(URL.createObjectURL(file))
-      
+      file.preview = URL.createObjectURL(file)
+      console.log(file);
+      setAvatar(file)
     }
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
-      console.log(event)
-    }
+    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+      event.preventDefault();
+
+      const formData = new FormData();
+		  formData.append('avatar', avatar);
+      const token = sessionStorage.getItem("token")
+      try{
+          const requestOptions = {
+              method: 'POST',
+              headers: { 'Authorization': 'Bearer ' + token },
+              body: formData
+          };
+          const response = await fetch(url, requestOptions)
+          const resJson = await response.json()
+          console.log("AAAA",resJson)
+      } catch(err) {
+          console.log("ERROR", err)
+      }}
   return (
     <div>
         <h1>Upload Avatar</h1>
         <div>
-            <img src={avatar? avatar : "https://cdn-icons-png.flaticon.com/512/1053/1053244.png?w=360"} alt="" style={{width: "100px", height: "100px"}}/>
+            <img src={avatar? avatar?.preview : "https://cdn-icons-png.flaticon.com/512/1053/1053244.png?w=360"} alt="" style={{width: "100px", height: "100px"}}/>
         </div>
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit} method="POST">
           <input type="file" id="myFile" name="filename" onChange={handleChange}/>
           <input type="submit"/>
         </form>

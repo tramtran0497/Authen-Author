@@ -16,7 +16,8 @@ export interface UserShowing{
 export const Home:React.FC<HomeProps> = () => {
     const [showing, setShowing] = useState(false)
     const [showingEdit, setShowingEdit] = useState(false)
-
+      const url = "http://localhost:5001/user/username"
+    // const url = "https://teetea-api.herokuapp.com/user/username"
     const [user, setUser] = useState<UserShowing>({
         name: "",
         email: "",
@@ -37,7 +38,7 @@ export const Home:React.FC<HomeProps> = () => {
             };
             try{
                 if(token){
-                    const data = await fetch(`https://teetea-api.herokuapp.com/user/username`, requestOptions)
+                    const data = await fetch(url, requestOptions)
                     const resJson = await data.json()
                     setUser({
                         name: resJson.name,
