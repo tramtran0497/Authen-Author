@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Edit } from './EditProfile';
+import { UploadAvatar } from './UploadAvatar';
 import { View } from "./ViewProfile";
 
 interface HomeProps {}
@@ -72,6 +73,7 @@ export const Home:React.FC<HomeProps> = () => {
         {
             showingEdit ? <Edit user={user}/> : null
         }
+        <UploadAvatar/>
         <button onClick={handleLogOut}>Log out</button>
     </div>
   )

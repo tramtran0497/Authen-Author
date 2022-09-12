@@ -23,30 +23,6 @@ export const View:React.FC<ViewProps> = () => {
         if(token){
             dispatch(fetchUser())
         }
-        // const fetchUserData = async() => {
-        //     const token = sessionStorage.getItem("token")
-
-        //     const requestOptions = {
-        //         headers: { 'Authorization': 'Bearer ' + token},
-        //     };
-        //     try{
-        //         if(token){
-        //             const data = await fetch(`https://teetea-api.herokuapp.com/user/username`, requestOptions)
-        //             const resJson = await data.json()
-        //             setUser({
-        //                 name: resJson.name,
-        //                 email: resJson.email,
-        //                 phoneNumber: resJson.phoneNumber,
-        //                 address: resJson.address,
-        //                 DOB: resJson.DOB,
-        //             })
-        //         }
-        //     } catch (err) {
-        //         console.log("Error", err)
-        //     }
-            
-        // }
-        // fetchUserData()
     }, [dispatch])
 
     useEffect(() => {
