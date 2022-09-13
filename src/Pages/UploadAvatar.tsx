@@ -4,8 +4,8 @@ interface UploadAvatarProps {
 
 export const UploadAvatar:React.FC<UploadAvatarProps> = () => {
     const [avatar, setAvatar] = useState<any>();
-    // const url = "https://teetea-api.herokuapp.com/user/username/avatar"
-    const url = "http://localhost:5001/user/username/avatar"
+    const url = process.env.REACT_APP_BASE_URL_HEROKU as string
+
     const handleChange=(event:  any) => {
       const file = event.target.files[0]
       file.preview = URL.createObjectURL(file)
@@ -24,7 +24,7 @@ export const UploadAvatar:React.FC<UploadAvatarProps> = () => {
               headers: { 'Authorization': 'Bearer ' + token },
               body: formData
           };
-          const response = await fetch(url, requestOptions)
+          const response = await fetch(`${url}/user/username/avatar`, requestOptions)
           const resJson = await response.json()
           console.log("AAAA",resJson)
       } catch(err) {
@@ -32,7 +32,7 @@ export const UploadAvatar:React.FC<UploadAvatarProps> = () => {
       }}
   return (
     <div>
-        <h1>Upload Avatar</h1>
+        <h1>{}Upload Avatar</h1>
         <div>
             <img src={avatar? avatar?.preview : "https://cdn-icons-png.flaticon.com/512/1053/1053244.png?w=360"} alt="" style={{width: "100px", height: "100px"}}/>
         </div>

@@ -11,6 +11,7 @@ interface EditProps {
 export const Edit:React.FC<EditProps> = ({user}) => {
     const [updatedUser, setUpdatedUser] = useState<UserShowing>(user);
     const dispatch = useDispatch<AppDispatch>();
+    const url = process.env.REACT_APP_BASE_URL_HEROKU as string
 
 
     const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -23,7 +24,7 @@ export const Edit:React.FC<EditProps> = ({user}) => {
                 headers: { 'Content-Type': 'application/json' , 'Authorization': 'Bearer ' + token},
                 body: JSON.stringify(updatedUser)
             };
-            const response = await fetch("https://teetea-api.herokuapp.com/user/username", requestOptions)
+            const response = await fetch(`${url}/user/username`, requestOptions)
             await response.json()
             dispatch(fetchUser())
         } catch(err) {

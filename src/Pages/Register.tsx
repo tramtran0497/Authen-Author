@@ -25,6 +25,7 @@ export const Register :React.FC<RegisterProps> = () => {
         DOB: "",
         isAdmin: false,
     });
+    const url = process.env.REACT_APP_BASE_URL_HEROKU as string
 
     const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ export const Register :React.FC<RegisterProps> = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
             };
-            await fetch('https://teetea-api.herokuapp.com/users', requestOptions)
+            await fetch(`${url}/users`, requestOptions)
             navigate('/login'); 
 
         } catch(err) {

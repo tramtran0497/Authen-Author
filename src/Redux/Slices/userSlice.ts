@@ -24,12 +24,14 @@ const initialState: InitialStateProps = {
 
 export const fetchUser = createAsyncThunk<User>("get/fetchUser", async() => {
     const token = sessionStorage.getItem("token")
+    const url = process.env.REACT_APP_BASE_URL_HEROKU as string
+
     const requestOptions = {
         headers: { 'Authorization': 'Bearer ' + token},
     };
     try{
         if(token){
-            const data = await fetch(`https://teetea-api.herokuapp.com/user/username`, requestOptions)
+            const data = await fetch(`${url}/user/username`, requestOptions)
             const resJson = await data.json()
             return resJson
         }

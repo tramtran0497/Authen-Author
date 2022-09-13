@@ -4,7 +4,6 @@ import { Home } from './Pages/Home';
 import { LogIn } from './Pages/LogIn';
 import Register from './Pages/Register';
 
-
 function App() {
   return (
     <div className="App">
