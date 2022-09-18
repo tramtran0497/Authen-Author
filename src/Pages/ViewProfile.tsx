@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { fetchUser } from '../Redux/Slices/userSlice'
 import { UserShowing } from './Home'
-import { useAppSelector, useAppDispatch } from '../Redux/hooks'
+import { useAppSelector} from '../Redux/hooks'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../Redux/store'
 
@@ -18,6 +18,7 @@ export const View:React.FC<ViewProps> = () => {
     })
     const dispatch = useDispatch<AppDispatch>();
     const userInfo = useAppSelector(state => state.user.userInfo)
+
     useEffect(()=> {
         const token = sessionStorage.getItem("token")
         if(token){

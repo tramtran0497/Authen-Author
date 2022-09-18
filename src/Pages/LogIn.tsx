@@ -22,7 +22,7 @@ export const LogIn: React.FC<LogInProps> = () => {
             };
             const response = await fetch(`${url}/login`, requestOptions)
             const resJson = await response.json()
-            sessionStorage.setItem('token', resJson.token);
+            sessionStorage.setItem('token', resJson.token as string);
             sessionStorage.setItem('user', JSON.stringify(resJson.user));
             navigate('/')
         } catch(err) {

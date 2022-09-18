@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Avatar } from './Avatar';
 import { Edit } from './EditProfile';
 import { UploadAvatar } from './UploadAvatar';
 import { View } from "./ViewProfile";
@@ -11,12 +12,15 @@ export interface UserShowing{
     phoneNumber: string,
     address: string,
     DOB: string,
+    _id?: string, 
 }
 
 export const Home:React.FC<HomeProps> = () => {
     const [showing, setShowing] = useState(false)
     const [showingEdit, setShowingEdit] = useState(false)
     const url = process.env.REACT_APP_BASE_URL_HEROKU as string
+
+    // const userInfo= JSON.parse(sessionStorage.getItem("user")!) 
 
     const [user, setUser] = useState<UserShowing>({
         name: "",
@@ -26,13 +30,11 @@ export const Home:React.FC<HomeProps> = () => {
         DOB: "",
     })
     const navigate = useNavigate();
-    useEffect(() => {
-    })
+
     // fetch User info
     useEffect(()=> {
         const fetchUserData = async() => {
             const token = sessionStorage.getItem("token")
-
             const requestOptions = {
                 headers: { 'Authorization': 'Bearer ' + token},
             };
@@ -56,7 +58,6 @@ export const Home:React.FC<HomeProps> = () => {
         fetchUserData()
     }, [])
 
-    // useEffect(()=> console.log(sessionStorage.getItem("user")))
     const handleLogOut = () => {
         sessionStorage.removeItem("token")
         sessionStorage.removeItem("user")
@@ -72,9 +73,10 @@ export const Home:React.FC<HomeProps> = () => {
         }
         <button onClick={() => setShowingEdit(!showingEdit)}>Edit</button>
         {
-            showingEdit ? <Edit user={user}/> : null
+            showingEdit ? <Edit /> : null
         }
-        <UploadAvatar/>
+        {/* <UploadAvatar/> */}
+        <Avatar/>
         <button onClick={handleLogOut}>Log out</button>
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 interface RegisterProps {
@@ -28,7 +28,6 @@ export const Register :React.FC<RegisterProps> = () => {
     const url = process.env.REACT_APP_BASE_URL_HEROKU as string
 
     const navigate = useNavigate();
-
     const handleSubmit = async(event: React.FormEvent<HTMLFormElement>):  Promise<void> => {
         event.preventDefault();
         try{
@@ -84,9 +83,9 @@ export const Register :React.FC<RegisterProps> = () => {
                 <input type="text" placeholder='DOB' name="DOB" value={user.DOB} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUser({...user, DOB: e.target.value})}/>
                 <br />
             </div>
-            
             <button>Register</button>
         </form>
+        
     </div>
   )
 }

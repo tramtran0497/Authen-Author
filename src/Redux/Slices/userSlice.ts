@@ -13,7 +13,8 @@ const initialState: InitialStateProps = {
         address: "",
         DOB: "",
         phoneNumber: "",
-        email: ""
+        email: "",
+        _id: "",
     },
     isLoading: false
 }
@@ -33,6 +34,7 @@ export const fetchUser = createAsyncThunk<User>("get/fetchUser", async() => {
         if(token){
             const data = await fetch(`${url}/user/username`, requestOptions)
             const resJson = await data.json()
+            console.log("RES", resJson)
             return resJson
         }
     } catch (err) {
